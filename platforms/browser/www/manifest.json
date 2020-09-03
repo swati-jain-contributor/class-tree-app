@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "LearnerTalks",
+  "short_name": "LearnerTalks",
+  "version": "com.classtree.android",
+  "description": "Knowledge sharing platform",
+  "author": "ClassTree Team",
+  "icons": [],
+  "start_url": "index.html"
+}

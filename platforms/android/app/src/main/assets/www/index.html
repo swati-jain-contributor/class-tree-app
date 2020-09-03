@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="en"><head><link rel="stylesheet" href="styles.css">
+  <title>ClassTree Learn Together</title>
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+     <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+     <link rel="icon" href="favicon.ico" type="image/ico" sizes="16x16">
+     <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
+
+     
+     <meta charset="utf-8">
+     <meta name="description" content="ClassTree is a knowledge sharing platform, open to people to share their knowledge with people who are interested in learning.">
+     <meta property="og:title" content="Together we learn  ">
+    <meta property="og:description" content="ClassTree is a knowledge sharing platform, open to people to share their knowledge with people who are interested in learning.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/swati-jain-contributor/privacy-policy/master/logo.JPG">
+    <meta property="og:url" content="http://www.classtree.in">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162981138-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-162981138-1');
+</script>
+<script src="https://meet.jit.si/external_api.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+</head>
+
+<body>
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&#xD7;</span>
+    </button>
+    <div class="toast-body">
+      $msg
+   </div>
+  </div>
+
+  <div id="app"></div>
+  
+  <script type="text/javascript" src="js/index.js"></script>
+  <script src="bundle.js"></script>
+  <script>
+
+function initiateDatepicker(context){
+  var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+  today.setDate(today.getDate() + 1);
+  $('[name="date"]').datepicker({minDate: today, change: context.onChange,close: context.checkELValidity});
+  
+  $('[name="startTime"]').dropdown({change: context.onChange});
+  $('[name="maxStudents"]').dropdown({change: context.onChange});
+}
+
+Date.prototype.toMysqlFormat = function() {
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
+function twoDigits(d) {
+  if(0 <= d && d < 10) return "0" + d.toString();
+  if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+  return d.toString();
+}
+
+function getMySQLDate(date,time){
+  let year = parseInt(date.split("/")[2]);
+  let month = parseInt(date.split("/")[0]);
+  let day = parseInt(date.split("/")[1]);
+  let hours= parseInt(time.substring(0,2)) + (time.indexOf("PM")>-1 ? 12:0);
+  let minutes= parseInt(time.substring(3,5));
+  console.log(year+","+month+","+day+","+hours+","+minutes);
+  return new Date(year,month-1,day,hours,minutes).toMysqlFormat();
+}
+function getUserLocalDate(date){
+  return new Date(Date.parse((date + " UTC").replace(/-/g, '/')));
+}
+function addMinutes(date, minutes) {
+  return new Date(date.getTime() + minutes*60000);
+}
+function formatAMPM(date) {
+var hours = date.getHours();
+var minutes = date.getMinutes();
+var ampm = hours >= 12 ? 'PM' : 'AM';
+hours = hours % 12;
+hours = hours ? hours : 12; // the hour '0' should be '12'
+minutes = minutes < 10 ? '0'+minutes : minutes;
+var strTime = hours + ':' + minutes + ' ' + ampm;
+return strTime;
+}
+
+function getQueryParams ( params, url ) {
+  
+  let href = url;
+  //this expression is to get the query strings
+  let reg = new RegExp( '[?&]' + params + '=([^&#]*)', 'i' );
+  let queryString = reg.exec(href);
+  return queryString ? queryString[1] : null;
+};
+
+function showSuccessToast(msg){
+  $(".toast").html($(".toast").html()
+            .replace("$msg",msg)
+            .replace("Congratulations! Class Registered successfully!",msg)
+            .replace("Thanks! Your class scheduled successfully!",msg));
+  $(".toast").toast("show");
+}
+
+function loadCarousel(){
+  $(".testimonials-carousel").owlCarousel({
+  autoplay: true,
+  dots: true,
+  loop: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+    768: {
+      items: 1
+    },
+    900: {
+      items: 2
+    }
+  }
+});
+}
+
+Object.defineProperty(navigator, 'userAgent', {
+    get: function () { return 'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Mobile Safari/537.36'; }
+});
+
+Object.defineProperty(navigator, 'platform', {
+    get: function () { return 'MacIntel'; }
+});
+
+Object.defineProperty(navigator, 'appName', {
+    get: function () { return 'Netscape'; }
+});
+
+Object.defineProperty(navigator, 'appCodeName', {
+    get: function () { return 'Mozilla'; }
+});
+
+function notifyMe(title, msg) {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(title ,{
+      icon: 'https://raw.githubusercontent.com/swati-jain-contributor/privacy-policy/master/logo.JPG',
+   body: msg,
+   badge:'https://raw.githubusercontent.com/swati-jain-contributor/privacy-policy/master/logo.JPG'
+    });
+  }
+
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification(msg);
+      }
+    });
+  }
+}
+
+function showThankyou(){
+  $("#modal-thankyou").modal();
+}
+
+function loadJitsi(id, topic,name){
+  const domain = 'meet.jit.si';
+    const options = {
+      roomName: "Classtree Live Class on "+ topic + " By " + name,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      parentNode: document.querySelector('#meet'),
+      interfaceConfigOverwrite: {OPEN_IN_MOBILE_BROWSER:true, SHOW_CHROME_EXTENSION_BANNER :false, MOBILE_APP_PROMO:false, JITSI_WATERMARK_LINK:"https://raw.githubusercontent.com/swati-jain-contributor/privacy-policy/master/logo.JPG" }
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+    api.on('readyToClose', () => {
+      location.href = "/student?thankyou=true";
+    });
+    api.addEventListener('readyToClose',  function(){
+      location.href = "/student?thankyou=true";
+                                              });
+}
+  </script>
+  
+
+
+</body></html>

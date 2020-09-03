@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "172452777433",
+    "firebase_url": "https://classtree-b3ae7.firebaseio.com",
+    "project_id": "classtree-b3ae7",
+    "storage_bucket": "classtree-b3ae7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172452777433:android:57ad324f9ac1e1654addc8",
+        "android_client_info": {
+          "package_name": "com.classtree.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172452777433-0hbhm5kremuhvm7mramjfsefsbc679to.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrrgKTjbriZV9semiOJpCbTcix0F4d-gM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172452777433-0hbhm5kremuhvm7mramjfsefsbc679to.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

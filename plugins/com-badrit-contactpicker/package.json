@@ -1,0 +1,55 @@
+{
+  "_from": "com-badrit-contactpicker",
+  "_id": "com-badrit-contactpicker@0.3.0",
+  "_inBundle": false,
+  "_integrity": "sha1-34BY9TrxzKozk1kUXrO7lMU83ds=",
+  "_location": "/com-badrit-contactpicker",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "com-badrit-contactpicker",
+    "name": "com-badrit-contactpicker",
+    "escapedName": "com-badrit-contactpicker",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/com-badrit-contactpicker/-/com-badrit-contactpicker-0.3.0.tgz",
+  "_shasum": "df8058f53af1ccaa339359145eb3bb94c53cdddb",
+  "_spec": "com-badrit-contactpicker",
+  "_where": "/Users/swati.jain/classtree/classtree",
+  "bugs": {
+    "url": "https://github.com/hazemhagrass/ContactPicker/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "com-badrit-contactpicker",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Cordova ContactPicker Plugin",
+  "homepage": "https://github.com/hazemhagrass/ContactPicker#readme",
+  "keywords": [
+    "cordova",
+    "contact",
+    "contactpicker",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "MIT",
+  "name": "com-badrit-contactpicker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hazemhagrass/ContactPicker.git"
+  },
+  "version": "0.3.0"
+}
